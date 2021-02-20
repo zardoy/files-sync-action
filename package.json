@@ -3,6 +3,7 @@
 	"version": "0.0.0",
 	"description": "Files sync action for Github",
 	"main": "dist/index.js",
+	"types": "src/index.ts",
 	"scripts": {
 		"build": "ncc build index.js -o dist -m",
 		"lint:all": "npx eslint --ext .js .",
