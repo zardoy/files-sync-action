@@ -4,23 +4,27 @@ branding:
   icon: copy
 description: Copies files from the action's environment (or any other repo) to many other repos.
 inputs:
-  COMMIT_MESSAGE:
+  GITHUB_TOKEN:
+    description: Token to use to get repos and write secrets
+    required: true
+  TARGET_REPOS:
     description: |
-      The commit message that will be used to commit the changed files. Check the README for all interpolation options.
-    required: false
-    default: Update file(s) from \"%SRC_REPO%\"
+      New line deliminated list of repositories. Repositires are limited to those in which the token user is an owner or collaborator. A custom branch can be defined for each repo by adding the branchname after a colon behind the repoSlug. `repoSlug` or `repoSlug:branchName`
+    required: true
   DRY_RUN:
     description: |
       Run everything except for the copying, removing and commiting functionality.
     required: false
     default: "false"
-  FILE_PATTERNS:
+  FILE_LIST:
     description: |
-      New line deliminated regex expressions to select files from the source repository. All filpaths start with the repos fullname without a leading slash. The delimiter between path segments is a forward slash.
+      New line deliminated file paths to select files from the source repository. All filpaths start with the repos fullname without a leading slash. The delimiter between path segments is a forward slash.
     required: true
-  GITHUB_TOKEN:
-    description: Token to use to get repos and write secrets
-    required: true
+  COMMIT_MESSAGE:
+    description: |
+      The commit message that will be used to commit the changed files. Check the README for all interpolation options.
+    required: false
+    default: Update file(s) from \"%SRC_REPO%\"
   GIT_EMAIL:
     description: |
       The e-mail address used to commit the synced files. Defaults to $GITHUB_ACTOR@users.noreply.github.com
@@ -47,10 +51,6 @@ inputs:
     description: |
       Repo from where files should be synced from. Defaults to $GITHUB_REPOSITORY. A custom branch can be defined by adding the branchname after a colon behind the SRC_REPO. `repoSlug` or `repoSlug:branchName`
     required: false
-  TARGET_REPOS:
-    description: |
-      New line deliminated list of repositories. Repositires are limited to those in which the token user is an owner or collaborator. A custom branch can be defined for each repo by adding the branchname after a colon behind the repoSlug. `repoSlug` or `repoSlug:branchName`
-    required: true
   TMPDIR:
     description: |
       The working directory where all sync operations will be done. Defaults to `tmp-${Date.now().toString()}`
