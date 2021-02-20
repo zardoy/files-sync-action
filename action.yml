@@ -1,7 +1,7 @@
 name: Files Sync Action
 author: Adrian Jost
 branding:
-  color: green
+  color: blue
   icon: copy
 description: Copies files from the action's environment (or any other repo) to many other repos.
 inputs:
