@@ -11,15 +11,15 @@ inputs:
     description: |
       New line deliminated list of repositories. Repositires are limited to those in which the token user is an owner or collaborator. A custom branch can be defined for each repo by adding the branchname after a colon behind the repoSlug. `repoSlug` or `repoSlug:branchName`
     required: true
+  FILE_LIST:
+    description: |
+      New line deliminated file paths to select files from the source repository. e.g. /.github/workflows/synced-deploy.yml
+    required: true
   DRY_RUN:
     description: |
       Run everything except for the copying, removing and commiting functionality.
     required: false
     default: "false"
-  FILE_LIST:
-    description: |
-      New line deliminated file paths to select files from the source repository. All filpaths start with the repos fullname without a leading slash. The delimiter between path segments is a forward slash.
-    required: true
   COMMIT_MESSAGE:
     description: |
       The commit message that will be used to commit the changed files. Check the README for all interpolation options.
@@ -35,11 +35,12 @@ inputs:
     required: false
   SKIP_DELETE:
     description: |
-      Will omit all delete operations for matching files present in `TARGET_REPO` but not existant in `SRC_REPO` if set to `true`. Defaults to `false`.
+      Will omit all delete operations for matching files present in `TARGET_REPO` but not existant in `SRC_REPO` if set to `true`.
     required: false
+    default: "false"
   SKIP_REPLACE:
     description: |
-      Will omit all write operations for matching files present in `SRC_REPO` and `TARGET_REPO` if set to `true`. Defaults to `false`.
+      Will omit all write operations for matching files present in `SRC_REPO` and `TARGET_REPO` if set to `true`.
     required: false
     default: "false"
   SKIP_CLEANUP:
@@ -57,12 +58,14 @@ inputs:
     required: false
   SRC_ROOT:
     description: |
-      Prepends this to all filepaths in the source repository. Defaults to `/`.
+      Prepends this to all filepaths in the source repository.
     required: false
+    default: /
   TARGET_ROOT:
     description: |
-      Prepends this to all filepaths in the target repository. Defaults to `/`.
+      Prepends this to all filepaths in the target repository.
     required: false
+    default: /
 runs:
   main: dist/index.js
   using: node12
