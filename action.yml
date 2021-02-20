@@ -1,5 +1,4 @@
 name: Files Sync Action
-author: Adrian Jost
 branding:
   color: blue
   icon: copy
@@ -9,10 +8,12 @@ inputs:
     description: |
       The commit message that will be used to commit the changed files. Check the README for all interpolation options.
     required: false
+    default: Update file(s) from \"%SRC_REPO%\"
   DRY_RUN:
     description: |
       Run everything except for the copying, removing and commiting functionality.
     required: false
+    default: "false"
   FILE_PATTERNS:
     description: |
       New line deliminated regex expressions to select files from the source repository. All filpaths start with the repos fullname without a leading slash. The delimiter between path segments is a forward slash.
@@ -36,10 +37,12 @@ inputs:
     description: |
       Will omit all write operations for matching files present in `SRC_REPO` and `TARGET_REPO` if set to `true`. Defaults to `false`.
     required: false
+    default: "false"
   SKIP_CLEANUP:
     description: |
       If set to true or 1, the cleanup step to remove the temporary workding directory at the end will be skipped. Usefull for debugging purposes.
     required: false
+    default: "false"
   SRC_REPO:
     description: |
       Repo from where files should be synced from. Defaults to $GITHUB_REPOSITORY. A custom branch can be defined by adding the branchname after a colon behind the SRC_REPO. `repoSlug` or `repoSlug:branchName`
