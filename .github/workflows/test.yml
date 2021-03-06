@@ -1,0 +1,12 @@
+name: Test Myself
+on:
+  push:
+    branches:
+      - master
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: zardoy/files-sync-action@master
+        with:
+          DRY_RUN: true
