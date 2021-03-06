@@ -5,10 +5,8 @@
 	"main": "dist/index.js",
 	"types": "src/index.ts",
 	"scripts": {
-		"build": "ncc build index.js -o dist -m",
-		"lint:all": "npx eslint --ext .js .",
-		"lint:all:fix": "npm run lint:all -- --fix",
-		"lint": "npm run lint:all:fix"
+		"build": "ncc build index.js -m",
+		"postinstall": "actions-inputs generate"
 	},
 	"keywords": [
 		"actions",
@@ -24,22 +22,19 @@
 		"@actions/core": "^1.2.6",
 		"@actions/github": "^4.0.0",
 		"@putout/git-status-porcelain": "^1.1.0",
-		"recursive-readdir": "^2.2.2",
-		"rimraf": "^3.0.2"
+		"actions-inputs": "^0.0.3",
+		"execa": "^5.0.0",
+		"rimraf": "^3.0.2",
+		"scan-dir-recursive": "^1.0.11"
 	},
 	"devDependencies": {
+		"@types/node": "^14.14.31",
 		"@zeit/ncc": "^0.22.3",
-		"eslint": "^7.19.0",
 		"eslint-config-prettier": "^7.2.0",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^3.3.1",
 		"eslint-plugin-sort-keys-fix": "^1.1.1",
-		"husky": "^5.0.9",
-		"prettier": "^2.2.1"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "npm run lint && npm run build && git add dist/*"
-		}
+		"prettier": "^2.2.1",
+		"type-fest": "^0.21.1"
 	}
 }
